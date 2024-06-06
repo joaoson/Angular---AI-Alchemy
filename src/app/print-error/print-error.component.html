@@ -1,0 +1,7 @@
+<!-- print-error.component.html -->
+<div class="text-danger" *ngIf="control && control.errors && (control.dirty || control.touched)">
+  <div *ngIf="control.errors.required">
+    This field is required.
+  </div>
+  <!-- Add other error messages based on your validation rules -->
+</div>

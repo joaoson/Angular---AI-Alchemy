@@ -1,0 +1,46 @@
+header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+h1{
+  white-space: nowrap;
+}
+
+input{
+  max-width: 300px;
+}
+
+button{
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+button p {
+  margin: 0;
+}
+
+.btn-secondary{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-primary{
+  border-radius: 0;
+  background-color: #7310eb;
+}
+
+
+#profileImage{
+  width: 10%;
+}
+
+#profileImage img{
+  width: 30%;
+  border-radius: 50%;
+}

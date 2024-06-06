@@ -1,0 +1,9 @@
+.item{
+  display: flex;
+  flex-direction: column;
+  height: auto;
+}
+
+.title{
+  display: flex;
+}

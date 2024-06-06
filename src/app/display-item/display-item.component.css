@@ -1,0 +1,41 @@
+.item{
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #f7f8f8;
+  border: 1px transparent rgba(255, 255, 255, 0.3);
+  border-radius: 7px;
+  position: relative;
+}
+
+.item::before {
+  background: radial-gradient(
+    300px circle at 50% 50px,
+    rgba(255, 255, 255, 0.20),
+    transparent 40%
+  );
+  border-radius: inherit;
+  content: "";
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  z-index: 3;
+}
+
+
+.itemImage{
+  filter: invert(97%) sepia(8%) saturate(2587%) hue-rotate(181deg) brightness(114%) contrast(95%);
+  aspect-ratio: 1/1;
+  width: 30%;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+figcaption{
+  font-size: 1.4rem;
+}
+
+fa-icon{
+  aspect-ratio: 1/1;
+  font-size: 1.4rem;
+}

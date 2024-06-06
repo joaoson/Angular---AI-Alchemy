@@ -1,0 +1,15 @@
+.items{
+  width: 100%;
+  display:flex;
+  flex-wrap: wrap;
+}
+
+app-display-item{
+  width: calc(25% - 5px);
+  transition: all 500ms;
+}
+
+app-display-item:hover{
+  border:1px solid rgba(115, 16, 235, 0.5) !important;
+  border-radius: 7px;
+}

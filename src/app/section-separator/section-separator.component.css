@@ -1,0 +1,37 @@
+p::before,
+p::after {
+  background-color: hsla(0, 0%, 100%, .08);
+  content: "";
+  display: inline-block;
+  height: 3px;
+  position: relative;
+  vertical-align: middle;
+  width: 50%;
+}
+
+p::before {
+  right: 0.5em;
+  margin-left: -50%;
+}
+
+p::after {
+  left: 0.5em;
+  margin-right: -50%;
+}
+p{
+  font-size: 1.5rem;
+  overflow: hidden;
+  text-align: center;
+}
+.one{
+  margin-top: 1rem;
+}
+.two{
+  margin-top: 2rem;
+}
+.three{
+  margin-top: 3rem;
+}
+.four{
+  margin-top: 4rem;
+}

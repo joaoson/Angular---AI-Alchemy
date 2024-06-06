@@ -1,0 +1,45 @@
+/* Reset default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Footer styles */
+footer {
+  color: #f7f8f8;
+  padding: 20px;
+  margin-top: 2rem;
+  z-index: 2;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.brand img {
+  max-width: 100px;
+}
+
+.menu {
+  display: flex;
+  justify-content: center;
+}
+
+ul {
+  list-style: none;
+  margin-right: 30px;
+}
+
+a {
+  color: #f7f8f8;
+  text-decoration: none;
+}
+
+/* Add more custom styles as needed */
+
+.footer-brand p {
+  margin: 0;
+}
