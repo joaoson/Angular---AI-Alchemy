@@ -17,9 +17,7 @@ export class ClientInterfaceComponent {
     document.addEventListener('DOMContentLoaded', () => {
       window.addEventListener('mousemove', (event) => {
         const mousePos = { x: event.clientX, y: event.clientY };
-        console.log(mousePos.x);
         const width: number | undefined = document.getElementById("light")?.getBoundingClientRect().width;
-        console.log(width);
         if (width !== undefined) {
           document.getElementById("light")?.animate({
             left: `${mousePos.x - width/2}px`,
