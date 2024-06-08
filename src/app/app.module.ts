@@ -26,6 +26,12 @@ import { LogInPageComponentComponent } from './log-in-page-component/log-in-page
 import { HomepageComponent } from './homepage/homepage.component';
 import { LoggedInNavbarComponent } from './logged-in-navbar/logged-in-navbar.component'; // Import ReactiveFormsModule
 
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { RouterModule } from '@angular/router';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -54,7 +60,12 @@ import { LoggedInNavbarComponent } from './logged-in-navbar/logged-in-navbar.com
     ReactiveFormsModule,
     AppRoutingModule,
     MatIconModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    RouterModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    AngularFireStorageModule,
+    AngularFireAuthModule
   ],
   providers: [
     provideClientHydration(),
