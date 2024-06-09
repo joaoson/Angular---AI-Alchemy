@@ -3,6 +3,7 @@ import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { map } from 'rxjs/operators';
 import { Profile } from './profile';
 import { Experience } from './experience';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +39,20 @@ export class ExperienceService {
           });
         })
       );}
+
+      getExperiencesByUser(userId: string | null) {
+        return this.db.list('experience', ref => ref.orderByChild('user').equalTo(userId))
+          .snapshotChanges()
+          .pipe(
+            map(changes => {
+              return changes.map(c => {
+                const data = c.payload.val() as { [key: string]: any };
+                const key = c.payload.key;
+                return { key, ...data };
+              });
+            })
+          );
+      }
 
   delete(key: string) {
     this.db.object(`experience/${key}`).remove();

@@ -5,6 +5,7 @@ import { ExperienceService } from '../../../Shared/experience.service';
 import { Observable } from 'rxjs';
 import { Profile } from '../../../Shared/profile';
 import { UserService } from '../../../Shared/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -18,12 +19,15 @@ export class ProfileComponent {
   experiences!: Observable<any>;
   profile!: Profile | null;
 
-
-  constructor(private fb: FormBuilder, private experienceService: ExperienceService, private userService : UserService) {}
+  constructor(private fb: FormBuilder, private experienceService: ExperienceService, private userService : UserService,private router: Router) {}
 
   ngOnInit(): void {
     this.profile = this.userService.getUser();
-      this.experiences = this.experienceService.getAll();
+    if(this.profile == null){
+      this.router.navigate(['/login']);
+      return
+    }
+    this.experiences = this.experienceService.getExperiencesByUser(this.profile.Username);
     console.log(this.profile)
     this.experienceForm = this.fb.group({
       title: ['', Validators.required],
@@ -38,7 +42,9 @@ export class ProfileComponent {
       this.experience = {
         title: this.experienceForm.value.title,
         description: this.experienceForm.value.company,
-        date: this.experienceForm.value.date
+        date: this.experienceForm.value.date,
+        user: this.profile?.Username,
+        place: "teste"
       };
       console.log(this.experience)
       // Send the profile object to the service
@@ -46,6 +52,8 @@ export class ProfileComponent {
 
       // Clear the form after submission
       this.experienceForm.reset();
+      location.reload();
+
     } else {
       console.log('Form is invalid');
     }

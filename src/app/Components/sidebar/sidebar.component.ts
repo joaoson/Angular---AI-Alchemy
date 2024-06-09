@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserService } from '../../Shared/user.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -6,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrl: './sidebar.component.css'
 })
 export class SidebarComponent {
+  constructor(private userService: UserService){}
 
+  clear(){
+    this.userService.clearUser();
+    location.reload();
+
+  }
 }
