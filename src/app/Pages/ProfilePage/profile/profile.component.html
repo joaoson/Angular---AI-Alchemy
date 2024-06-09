@@ -1,0 +1,100 @@
+<main class="d-flex">
+  <app-sidebar>
+  </app-sidebar>
+
+  <div class="profile">
+    <div class="header">
+      <img src="" alt="Cover Photo" class="cover-photo">
+      <img src="" alt="User Photo" class="user-photo">
+      <h2></h2>
+      <p>Project Manager & UX/UI Designer</p>
+      <p>Paris, France <span>Contact info</span></p>
+      <div class="actions">
+        <button>More</button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          Add experience
+        </button>
+      </div>
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add Experience</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="experienceForm" (ngSubmit)="onSubmit()">
+              <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input formControlName="title" type="text" class="form-control" id="title" placeholder="Enter title">
+              </div>
+              <div class="mb-3">
+                <label for="company" class="form-label">Company</label>
+                <input formControlName="company" type="text" class="form-control" id="company" placeholder="Enter company name">
+              </div>
+              <div class="mb-3">
+                <label for="timeStarted" class="form-label">Time Started</label>
+                <input formControlName="date" type="date" class="form-control" id="timeStarted">
+              </div>
+              <button type="submit" class="btn btn-primary">Save changes</button>
+            </form>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="about">
+      <h3>About Me</h3>
+      <p>Since 2018, I am a UX/UI designer within the team roob.in, and thanks to the accumulated knowledge and experience, I am a completely "independent combat unit".</p>
+      <p>I know and understand every stage of creating a high-quality UX/UI design, I am able to protect each of my solutions, find and offer an alternative, listen carefully to the customer and solve his problem.</p>
+    </div>
+    <div class="experience">
+      <h3>Experience</h3>
+      <div class="card mt-2" *ngFor="let experience of experiences | async">
+        <app-experience [Title]="experience.title" [Company]="experience.description" [Date]="experience.date"></app-experience>
+        <div class="card-footer">
+          <button type="button" class="btn btn-default" (click)="edit(experience, experience.key)">Editar</button>
+          <button type="button" class="btn btn-danger ml-2" (click)="delete(experience.key)">Excluir</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="right-sidebar">
+    <div class="stats">
+      <div>
+        <h4>19</h4>
+        <p>Your profile views</p>
+      </div>
+      <div>
+        <h4>89</h4>
+        <p>Post views</p>
+      </div>
+      <button>Try Premium Free for 1 Month</button>
+    </div>
+    <div class="people-viewed">
+      <h3>People also viewed</h3>
+      <ul>
+        <li>Konstantin Vinogradov - Product Designer</li>
+        <li>Ilya Dudakov - Crypto Designer #1 in the World</li>
+        <li>Konstantin Zlobin - UI/UX Designer</li>
+        <li>Oleg Putincev - UX/UI Designer</li>
+        <li>Casey Neistat - Youtuber</li>
+      </ul>
+    </div>
+    <div class="learning">
+      <h3>Learning</h3>
+      <p>Add new skills with these courses, free for 24 hours</p>
+      <div class="course">
+        <img src="" alt="Course Thumbnail">
+        <p>Showreel Design Trends 2019 - 1,649 Views</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Include Bootstrap JS -->

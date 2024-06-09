@@ -32,6 +32,9 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { RouterModule } from '@angular/router';
 import { environment } from '../environments/environment';
+import { ProfileComponent } from './Pages/ProfilePage/profile/profile.component';
+import { SidebarComponent } from './Components/sidebar/sidebar.component';
+import { ExperienceComponent } from './Components/experience/experience.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +57,9 @@ import { environment } from '../environments/environment';
     LogInPageComponentComponent,
     HomepageComponent,
     LoggedInNavbarComponent,
+    ProfileComponent,
+    SidebarComponent,
+    ExperienceComponent,
   ],
   imports: [
     BrowserModule,

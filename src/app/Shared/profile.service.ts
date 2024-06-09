@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { map } from 'rxjs/operators';
 import { Profile } from './profile';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -31,12 +32,18 @@ export class ProfileService {
       .pipe(
         map(changes => {
           return changes.map(c => {
-            const data = c.payload.val() as { [key: string]: any }; // Explicitly cast to an object type
-            const key = c.payload.key;
+            const data = c.payload.val() as Profile; // Explicitly cast to an object type
+            const key = c.payload.key || "";
             return { key, ...data };
           });
         })
       );}
+
+  checkCredentials(email: string, password: string): Observable<any> {
+    return this.getAll().pipe(
+      map(profiles => profiles.find(profile => profile.Email === email && profile.Password === password))
+    );
+  }
 
   delete(key: string) {
     this.db.object(`profile/${key}`).remove();
