@@ -3,15 +3,15 @@
   <div class="admin-tools">
     <h3>Profile Page</h3>
     <ul>
-      <li>Profile</li>
+      <li><a routerLink="../profile">Profile</a></li>
       <li>My Models</li>
       <li>My Posts</li>
-      <li>Settings</li>
+      <li><a routerLink="../settings">Settings</a></li>
     </ul>
   </div>
   <div class="admin-profile">
     <img src="" alt="Admin Photo">
-    <div class="admin-name">Anna Doshy</div>
+    <div class="admin-name">{{profile?.Username}}</div>
     <button (click)="clear()">Sign out</button>
   </div>
 </div>

@@ -10,18 +10,18 @@ import { ComponentComponent } from './component/component.component';
 import { LogInPageComponentComponent } from './log-in-page-component/log-in-page-component.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { ProfileComponent } from './Pages/ProfilePage/profile/profile.component';
+import { SettingsComponent } from './Pages/ProfilePage/settings/settings.component';
+import { EditExperienceComponent } from './Components/edit-experience/edit-experience.component';
 
 const routes: Routes = [
-  {path: "produto", component: ProdutoComponent},
-  {path: "usuario", component: UsuarioComponent},
   {path: "", component: ClientInterfaceComponent},
-  {path: "teste", component: DisplaySectionComponent},
-  {path: "layout", component: LayoutComponent},
   {path: "signUp", component: SignUpPageComponent},
   {path: "component", component: ComponentComponent},
   {path: "login", component: LogInPageComponentComponent},
   {path: "homepage", component: HomepageComponent},
   {path: "profile", component: ProfileComponent},
+  {path: 'settings', component: SettingsComponent},
+  { path: 'edit-experience/:key', component: EditExperienceComponent }, // Define the edit route
 ];
 
 @NgModule({

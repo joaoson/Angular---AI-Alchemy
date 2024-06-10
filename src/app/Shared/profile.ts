@@ -1,4 +1,5 @@
 export class Profile {
+  key?: string;
   firstName: string = '';
   Surname: string = '';
   Username: string = '';

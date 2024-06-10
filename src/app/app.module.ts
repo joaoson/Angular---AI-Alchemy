@@ -37,6 +37,7 @@ import { SidebarComponent } from './Components/sidebar/sidebar.component';
 import { ExperienceComponent } from './Components/experience/experience.component';
 import { ProfileSettingsComponent } from './Pages/profile-settings/profile-settings.component';
 import { SettingsComponent } from './Pages/ProfilePage/settings/settings.component';
+import { EditExperienceComponent } from './Components/edit-experience/edit-experience.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { SettingsComponent } from './Pages/ProfilePage/settings/settings.compone
     ExperienceComponent,
     ProfileSettingsComponent,
     SettingsComponent,
+    EditExperienceComponent
   ],
   imports: [
     BrowserModule,

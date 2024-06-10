@@ -26,6 +26,10 @@ export class ExperienceService {
       });
   }
 
+  getExperience(key: string): Observable<any> {
+    return this.db.object(`experience/${key}`).valueChanges();
+  }
+
 
   getAll() {
     return this.db.list('experience')

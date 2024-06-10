@@ -1,26 +1,33 @@
-import { Component } from '@angular/core';
-import { Profile } from '../../../Shared/profile';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ProfileService } from '../../../Shared/profile.service';
-import { UserService } from '../../../Shared/user.service';
-import { Router } from '@angular/router';
-import { first } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ExperienceService } from '../../Shared/experience.service';
+import { ProfileService } from '../../Shared/profile.service';
+import { UserService } from '../../Shared/user.service';
+import { Profile } from '../../Shared/profile';
 
 @Component({
-  selector: 'app-settings',
-  templateUrl: './settings.component.html',
-  styleUrl: './settings.component.css'
+  selector: 'app-edit-experience',
+  templateUrl: './edit-experience.component.html',
+  styleUrls: ['./edit-experience.component.css']
 })
-export class SettingsComponent {
+export class EditExperienceComponent implements OnInit {
+  key!: string;
+  experienceForm!: FormGroup;
   profile!: Profile | null;
-  key: string = '';
   registrationForm!: FormGroup;
-  profileUpdated!: Profile | null;
 
-
-  constructor(private fb: FormBuilder, private profileService: ProfileService, private userService: UserService, private router: Router) {}
+ constructor(private fb: FormBuilder, private profileService: ProfileService, private userService: UserService, private router: Router, private route: ActivatedRoute,  private experienceService: ExperienceService){}
 
   ngOnInit(): void {
+    this.key = this.route.snapshot.paramMap.get('key') || ''; // Get the key from route parameters
+    console.log(this.key)
+    this.experienceForm = this.fb.group({
+      title: ['', Validators.required],
+      company: ['', Validators.required],
+      date: ['', Validators.required]
+    });
+
     this.profile = this.userService.getUser();
     if(this.profile == null){
       this.router.navigate(['/login']);
@@ -35,6 +42,16 @@ export class SettingsComponent {
       country: [this.profile.Country, Validators.required],
       email: [this.profile.Email, [Validators.required, Validators.email]],
     });
+
+    this.loadExperience();
+  }
+
+  loadExperience(): void {
+    if (this.key) {
+      this.experienceService.getExperience(this.key).subscribe(experience => {
+        this.experienceForm.patchValue(experience);
+      });
+    }
   }
 
   onSubmit(): any {

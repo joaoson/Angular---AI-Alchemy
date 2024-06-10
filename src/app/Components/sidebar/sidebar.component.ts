@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { UserService } from '../../Shared/user.service';
+import { Profile } from '../../Shared/profile';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,7 +9,19 @@ import { UserService } from '../../Shared/user.service';
   styleUrl: './sidebar.component.css'
 })
 export class SidebarComponent {
-  constructor(private userService: UserService){}
+  profile!: Profile | null;
+
+  constructor(private userService: UserService, private router: Router){}
+
+  ngOnInit(): void {
+    this.profile = this.userService.getUser();
+    if(this.profile == null){
+      this.router.navigate(['/login']);
+      return
+    }
+
+  }
+
 
   clear(){
     this.userService.clearUser();

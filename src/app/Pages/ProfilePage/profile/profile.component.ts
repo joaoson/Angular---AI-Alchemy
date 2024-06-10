@@ -63,8 +63,10 @@ export class ProfileComponent {
     this.experienceService.delete(key);
   }
 
-  edit(experience: Experience, key: string) {
-    this.experienceService.update(experience, key);
-  }
+
+  edit(key: string | null): void {
+    if (key) {
+      this.router.navigate(['/edit-experience', key]);
+    }}
 
 }

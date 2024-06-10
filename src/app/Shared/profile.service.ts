@@ -18,10 +18,11 @@ export class ProfileService {
       });
   }
 
-  update(profile: Profile, key: string) {
-    this.db.list('profile').update(key, profile)
+  update(profile: Profile, key: string): Promise<void> {
+    return this.db.list('profile').update(key, profile)
       .catch((error: any) => {
-        console.error(error);
+        console.error('Error updating profile:', error);
+        throw error; // Re-throw to handle it in the caller function if needed
       });
   }
 
