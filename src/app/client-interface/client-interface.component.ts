@@ -1,11 +1,12 @@
-import { Component, OnInit, Inject, PLATFORM_ID,AfterViewInit  } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID,AfterViewInit, ViewEncapsulation  } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
 
 @Component({
   selector: 'app-client-interface',
   templateUrl: './client-interface.component.html',
-  styleUrl: './client-interface.component.css'
+  styleUrl: './client-interface.component.css',
+  encapsulation: ViewEncapsulation.None
 })
 export class ClientInterfaceComponent {
 

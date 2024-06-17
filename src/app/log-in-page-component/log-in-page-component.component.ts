@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { UserService } from '../Shared/user.service';
 import { ProfileService } from '../Shared/profile.service';
 import { Profile } from '../Shared/profile';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-log-in-page-component',
   templateUrl: './log-in-page-component.component.html',
@@ -35,18 +36,26 @@ export class LogInPageComponentComponent {
       console.log(this.registrationForm.value);
       this.profileService.checkCredentials(this.credentials.email, this.credentials.password).subscribe((user: Profile | undefined) => {
         if (user) {
-          // Store user information in the service
           this.userService.setUser(user);
 
-          // Navigate to the profile page after login
           this.router.navigate(['/profile']);
         } else {
-          // Handle invalid credentials
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Your Email or Password are not correct!",
+          });
           console.log('Invalid email or password');
+
         }
       });
     }
     else{
+      Swal.fire({
+        icon: "error",
+        title: "Please fill in the fieds correctly!",
+        text: "You need a real Email and a password with a minimun length of 6 characters. ",
+      });
 
     }
     }

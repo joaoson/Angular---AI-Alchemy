@@ -1,36 +1,38 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/compat/database';
-import { map } from 'rxjs/operators';
-import { Profile } from './profile';
-import { Experience } from './experience';
+import { Model } from './model';
 import { Observable } from 'rxjs';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
+import { Experience } from './experience';
+import { map } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class ExperienceService {
+export class ModelService {
 
   constructor(private db: AngularFireDatabase) { }
 
-  insert(experience: Experience) {
-    this.db.list('experience').push(experience)
+  insert(model: Model) {
+    this.db.list('model').push(model)
       .then((result: any) => {
         console.log(result.key);
       });
   }
 
-  getExperience(key: string): Observable<Experience> {
-    return this.db.object<Experience>(`experience/${key}`).snapshotChanges().pipe(
+  getExperience(key: string): Observable<Model> {
+    return this.db.object<Model>(`model/${key}`).snapshotChanges().pipe(
       map(snapshot => {
-        const data = snapshot.payload.val() as Experience;
+        const data = snapshot.payload.val() as Model;
         const key = snapshot.payload.key;
-        return { key, ...data } as Experience;
+        return { key, ...data } as Model;
       })
     );
   }
 
-  updateExperience(experience: Experience, key: string): Promise<void> {
-    return this.db.list('experience').update(key, experience)
+
+  updateExperience(model: Model, key: string): Promise<void> {
+    return this.db.list('model').update(key, model)
       .catch((error: any) => {
         console.error(error);
       });
@@ -38,7 +40,7 @@ export class ExperienceService {
 
 
   getAll() {
-    return this.db.list('experience')
+    return this.db.list('model')
       .snapshotChanges()
       .pipe(
         map(changes => {
@@ -51,7 +53,7 @@ export class ExperienceService {
       );}
 
       getExperiencesByUser(userId: string | null) {
-        return this.db.list('experience', ref => ref.orderByChild('user').equalTo(userId))
+        return this.db.list('model', ref => ref.orderByChild('user').equalTo(userId))
           .snapshotChanges()
           .pipe(
             map(changes => {
@@ -65,6 +67,7 @@ export class ExperienceService {
       }
 
   delete(key: string) {
-    this.db.object(`experience/${key}`).remove();
+    this.db.object(`model/${key}`).remove();
   }
+
 }

@@ -7,31 +7,34 @@ import { UserService } from '../../Shared/user.service';
 import { Profile } from '../../Shared/profile';
 import { Experience } from '../../Shared/experience';
 import {Location} from '@angular/common';
+import { Model } from '../../Shared/model';
+import { ModelService } from '../../Shared/model.service';
 
 @Component({
-  selector: 'app-edit-experience',
-  templateUrl: './edit-experience.component.html',
-  styleUrls: ['./edit-experience.component.css']
+  selector: 'app-edit-model',
+  templateUrl: './edit-model.component.html',
+  styleUrls: ['./edit-model.component.css']
 })
-export class EditExperienceComponent implements OnInit {
+export class EditModelComponent implements OnInit {
   key!: string;
   experienceForm!: FormGroup;
   profile!: Profile | null;
   experience!: Experience | null;
+  model!: Model | null;
 
 
- constructor(private location: Location,private fb: FormBuilder, private userService: UserService, private router: Router, private route: ActivatedRoute,  private experienceService: ExperienceService){}
+ constructor(private location: Location,private fb: FormBuilder, private userService: UserService, private router: Router, private route: ActivatedRoute, private modelService: ModelService,  private experienceService: ExperienceService){}
 
   ngOnInit(): void {
     this.key = this.route.snapshot.paramMap.get('key') || ''; // Get the key from route parameters
     console.log(this.key)
     this.loadExperience();
     this.experienceForm = this.fb.group({
-      title: [this.experience?.title, Validators.required],
-      description: [this.experience?.description, Validators.required],
-      date: [this.experience?.date, Validators.required]
+      title: [this.model?.title, Validators.required],
+      description: [this.model?.description, Validators.required],
+      date: [this.model?.date, Validators.required]
     });
-    console.log(this.experience)
+    console.log(this.model)
     this.profile = this.userService.getUser();
     if(this.profile == null){
       this.router.navigate(['/login']);
@@ -46,10 +49,10 @@ export class EditExperienceComponent implements OnInit {
 
   loadExperience(): void {
     if (this.key) {
-      this.experienceService.getExperience(this.key).subscribe(experience => {
-        this.experience = experience;
-        console.log(experience)
-        this.experienceForm.patchValue(experience);
+      this.modelService.getExperience(this.key).subscribe(model => {
+        this.model = model;
+        console.log(model)
+        this.experienceForm.patchValue(model);
       });
     }
   }
@@ -60,16 +63,16 @@ export class EditExperienceComponent implements OnInit {
         return
       }
       // Create a new Profile object and assign form values
-      const updatedExperience: Experience = {
-        ...this.experience,
+      const updatedExperience: Model = {
+        ...this.model,
         title: this.experienceForm.value.title,
         description: this.experienceForm.value.description,
         date: this.experienceForm.value.date,
         user: this.profile.Username
       };
-      this.experienceService.updateExperience(updatedExperience, this.key)
+      this.modelService.updateExperience(updatedExperience, this.key)
         .then(() => {
-          console.log('Experience updated successfully');
+          console.log('Model updated successfully');
           this.router.navigate(['/profile']); // Redirect to settings page after update
         })
         .catch((error: any) => {

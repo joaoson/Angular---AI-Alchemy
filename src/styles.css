@@ -3,9 +3,10 @@
 @import url(../node_modules/bootstrap/dist/css/bootstrap.min.css);
 
 html, body { height: 100%; }
-body { margin: 0;background-color: #000717; color: #f7f8f8;position: relative;z-index: 1;}
+body { margin: 0;background-color: #71747d4d; color: #f7f8f8;position: relative;z-index: 1;}
 body::-webkit-scrollbar-track
 {
+  color: #161618 !important;
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
 	background-color: #161618;
 }

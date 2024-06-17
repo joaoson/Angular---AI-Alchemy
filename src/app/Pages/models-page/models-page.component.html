@@ -1,0 +1,90 @@
+<main class="d-flex">
+  <app-sidebar>
+  </app-sidebar>
+  <div class="experience profile">
+    <h3>My Models</h3>
+    <div class="actions">
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Add Model
+      </button>
+    </div>
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Model</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="experienceForm" (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+              <label for="title" class="form-label">Title</label>
+              <input formControlName="title" type="text" class="form-control" id="title" placeholder="Enter title">
+            </div>
+            <div class="mb-3">
+              <label for="company" class="form-label">Company</label>
+              <input formControlName="company" type="text" class="form-control" id="company" placeholder="Enter company name">
+            </div>
+            <div class="mb-3">
+              <label for="timeStarted" class="form-label">Time Started</label>
+              <input formControlName="date" type="date" class="form-control" id="timeStarted">
+            </div>
+            <div class="mb-3">
+              <label for="url" class="form-label">Url of Model</label>
+              <input formControlName="url" type="text" class="form-control" id="url">
+            </div>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </form>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="my-5" *ngFor="let experience of models | async">
+      <app-model [Title]="experience.title" [User]="profile?.Username" [Company]="experience.description" [Date]="experience.date" [Url]="experience.url" [Likes]="experience.Likes" ></app-model>
+      <div class="card-footer">
+        <button type="button" class="btn btn-primary mr-4" (click)="edit(experience.key)">Editar</button>
+        <button type="button" class="btn btn-danger ml-2" (click)="delete(experience.key)">Excluir</button>
+    </div>
+    </div>
+
+  </div>
+
+
+  <div class="right-sidebar">
+    <div class="stats">
+      <div>
+        <h4>19</h4>
+        <p>Your profile views</p>
+      </div>
+      <div>
+        <h4>89</h4>
+        <p>Post views</p>
+      </div>
+    </div>
+    <div class="people-viewed">
+      <h3>People also viewed</h3>
+      <ul>
+        <li>Konstantin Vinogradov - Product Designer</li>
+        <li>Ilya Dudakov - Crypto Designer #1 in the World</li>
+        <li>Konstantin Zlobin - UI/UX Designer</li>
+        <li>Oleg Putincev - UX/UI Designer</li>
+        <li>Casey Neistat - Youtuber</li>
+      </ul>
+    </div>
+    <div class="learning">
+      <h3>Learning</h3>
+      <p>Add new skills with these courses, free for 24 hours</p>
+      <div class="course">
+        <img src="" alt="Course Thumbnail">
+        <p>Showreel Design Trends 2019 - 1,649 Views</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Include Bootstrap JS -->

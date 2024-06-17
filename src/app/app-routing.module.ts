@@ -12,6 +12,8 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { ProfileComponent } from './Pages/ProfilePage/profile/profile.component';
 import { SettingsComponent } from './Pages/ProfilePage/settings/settings.component';
 import { EditExperienceComponent } from './Components/edit-experience/edit-experience.component';
+import { ModelsPageComponent } from './Pages/models-page/models-page.component';
+import { EditModelComponent } from './Components/edit-model/edit-model.component';
 
 const routes: Routes = [
   {path: "", component: ClientInterfaceComponent},
@@ -20,8 +22,13 @@ const routes: Routes = [
   {path: "login", component: LogInPageComponentComponent},
   {path: "homepage", component: HomepageComponent},
   {path: "profile", component: ProfileComponent},
+  {path: "models", component: ModelsPageComponent},
   {path: 'settings', component: SettingsComponent},
   { path: 'edit-experience/:key', component: EditExperienceComponent }, // Define the edit route
+  { path: 'edit-model/:key', component: EditModelComponent }, // Define the edit route
+  { path: '', redirectTo: '/profile', pathMatch: 'full' }, // Default route
+  { path: '**', redirectTo: '/profile' } // Fallback route
+
 ];
 
 @NgModule({

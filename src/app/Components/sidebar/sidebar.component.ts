@@ -21,7 +21,25 @@ export class SidebarComponent {
     }
 
   }
+  profilePage(){
+    this.router.navigate(['/profile']);
 
+  }
+
+  settingsPage(){
+    this.router.navigate(['/settings']);
+
+  }
+
+  modelsPage(){
+    this.router.navigate(['/models']);
+
+  }
+
+  homePage(){
+    this.router.navigate(['/homepage']);
+
+  }
 
   clear(){
     this.userService.clearUser();

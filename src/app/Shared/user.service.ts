@@ -13,6 +13,7 @@ export class UserService {
 
   getUser(): Profile | null {
     const userString = sessionStorage.getItem(this.userKey);
+    console.log(userString)
     return userString ? JSON.parse(userString) as Profile : null;
   }
 

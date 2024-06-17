@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { Experience } from '../../../Shared/experience';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ExperienceService } from '../../../Shared/experience.service';
@@ -6,11 +6,14 @@ import { Observable } from 'rxjs';
 import { Profile } from '../../../Shared/profile';
 import { UserService } from '../../../Shared/user.service';
 import { Router } from '@angular/router';
+import { ProfileService } from '../../../Shared/profile.service';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrl: './profile.component.css'
+  styleUrl: './profile.component.css',
+  encapsulation: ViewEncapsulation.None
+
 })
 export class ProfileComponent {
   experience!: Experience
@@ -18,8 +21,9 @@ export class ProfileComponent {
   experienceForm!: FormGroup;
   experiences!: Observable<any>;
   profile!: Profile | null;
+  profiles!:Observable<any>;
 
-  constructor(private fb: FormBuilder, private experienceService: ExperienceService, private userService : UserService,private router: Router) {}
+  constructor(private profileService: ProfileService, private fb: FormBuilder, private experienceService: ExperienceService, private userService : UserService,private router: Router) {}
 
   ngOnInit(): void {
     this.profile = this.userService.getUser();
@@ -29,6 +33,7 @@ export class ProfileComponent {
     }
     this.experiences = this.experienceService.getExperiencesByUser(this.profile.Username);
     console.log(this.profile)
+    this.profiles = this.profileService.getAll()
     this.experienceForm = this.fb.group({
       title: ['', Validators.required],
       company: ['', Validators.required],

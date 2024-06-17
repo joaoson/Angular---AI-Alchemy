@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -38,6 +39,12 @@ import { ExperienceComponent } from './Components/experience/experience.componen
 import { ProfileSettingsComponent } from './Pages/profile-settings/profile-settings.component';
 import { SettingsComponent } from './Pages/ProfilePage/settings/settings.component';
 import { EditExperienceComponent } from './Components/edit-experience/edit-experience.component';
+import { ModelsComponent } from './Components/models/models.component';
+import { ModelsPageComponent } from './Pages/models-page/models-page.component';
+import { EditModelComponent } from './Components/edit-model/edit-model.component';
+import { HomepagePostComponent } from './Components/homepage-post/homepage-post.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { ModelComponent } from './Components/model/model.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +72,12 @@ import { EditExperienceComponent } from './Components/edit-experience/edit-exper
     ExperienceComponent,
     ProfileSettingsComponent,
     SettingsComponent,
-    EditExperienceComponent
+    EditExperienceComponent,
+    ModelsComponent,
+    ModelsPageComponent,
+    EditModelComponent,
+    HomepagePostComponent,
+    ModelComponent
   ],
   imports: [
     BrowserModule,
@@ -77,7 +89,9 @@ import { EditExperienceComponent } from './Components/edit-experience/edit-exper
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireStorageModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    SweetAlert2Module.forRoot(),
+    InfiniteScrollModule
   ],
   providers: [
     provideClientHydration(),

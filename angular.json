@@ -36,7 +36,8 @@
             ],
             "styles": [
               "@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.css"
+              "src/styles.css",
+              "./node_modules/sweetalert2/src/sweetalert2.scss"
             ],
             "scripts": ["src/assets/client-interface.js",
             "./node_modules/bootstrap/dist/js/bootstrap.min.js"

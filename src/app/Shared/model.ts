@@ -1,7 +1,8 @@
-export class Experience {
+export class Model {
   title: string = '';
   description: string = '';
   date: string = '';
   user?: string | undefined = '';
-  place?: string = '';
+  likes?: number;
+  url?: string = '';
 }
