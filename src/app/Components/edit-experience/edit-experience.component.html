@@ -39,22 +39,18 @@
     <div class="people-viewed">
       <h3>People also viewed</h3>
       <ul>
-        <li>Konstantin Vinogradov - Product Designer</li>
-        <li>Ilya Dudakov - Crypto Designer #1 in the World</li>
-        <li>Konstantin Zlobin - UI/UX Designer</li>
-        <li>Oleg Putincev - UX/UI Designer</li>
-        <li>Casey Neistat - Youtuber</li>
+        <div *ngFor="let users of profiles | async">
+        <li>{{users.Username}}</li>
+      </div>
+
       </ul>
     </div>
     <div class="learning">
       <h3>Learning</h3>
       <p>Add new skills with these courses, free for 24 hours</p>
-      <div class="course">
-        <img src="" alt="Course Thumbnail">
-        <p>Showreel Design Trends 2019 - 1,649 Views</p>
-      </div>
+
     </div>
-  </div>
+    </div>
 </main>
 
 <!-- Include Bootstrap JS -->

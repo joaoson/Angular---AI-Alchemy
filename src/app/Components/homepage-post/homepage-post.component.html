@@ -1,19 +1,5 @@
 <div class="post">
-  <div class="user-info">
-    <img src="" alt="User Profile" class="profile-pic">
-    <div class="user-details">
-      <h3>spfc.maior.do.brasil</h3>
-      <p>6 h</p>
-    </div>
-  </div>
-  <p class="post-content">
-    Um jogo que era pra ter sido expulsão do goleiro do Corinthians, porém toda vez o juiz é favor só Corinthians caiu em Itaquera o juiz opera
-  </p>
-  <div class="post-tags">
-    <a href="#">#saopaulo</a> <a href="#">#jogao</a> <a href="#">#corinthians</a>
-  </div>
-  <div class="post-image">
-    <img src="" alt="Post Image">
-    <p>SÃO PAULO TIME GUERREIRO</p>
+  <div class="my-5" *ngFor="let experience of models | async">
+    <app-model [Title]="experience.title" [User]="experience.user" [Company]="experience.description" [Date]="experience.date" [Url]="experience.url" [Likes]="experience.likes" ></app-model>
   </div>
 </div>

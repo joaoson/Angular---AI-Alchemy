@@ -3,12 +3,11 @@
   </app-sidebar>
 
   <div class="profile">
-    <div class="header">
-      <img src="" alt="Cover Photo" class="cover-photo">
-      <img src="" alt="User Photo" class="user-photo">
+    <div class="header mt-5">
+      <img src="{{profile?.Url}}" alt="User Photo" class="user-photo">
       <h2>{{profile?.Username}}</h2>
-      <p>Project Manager & UX/UI Designer</p>
-      <p>Paris, France <span>Contact info</span></p>
+      <p>First Name - {{profile?.firstName}}</p>
+      <p>Surname - {{profile?.Surname}}</p>
       <div class="actions">
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
           Add experience
@@ -51,13 +50,39 @@
       <h3>About Me</h3>
       <p>Since 2018, I am a UX/UI designer within the team roob.in, and thanks to the accumulated knowledge and experience, I am a completely "independent combat unit".</p>
       <p>I know and understand every stage of creating a high-quality UX/UI design, I am able to protect each of my solutions, find and offer an alternative, listen carefully to the customer and solve his problem.</p>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AboutModal">
+        Edit About Me
+      </button>
+      <div class="modal fade" id="AboutModal" tabindex="-1" aria-labelledby="AboutModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="AboutModalLabel">Edit About Me</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form  [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+              <div class="mb-3">
+                <label for="About" class="form-label">Type here</label>
+                <textarea formControlName="About" type="text" class="form-control" id="About" placeholder="Enter About"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Save changes</button>
+            </form>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
     </div>
     <div class="experience">
       <h3>Experience</h3>
       <div class="my-5" *ngFor="let experience of experiences | async">
         <app-experience [Title]="experience.title" [Company]="experience.description" [Date]="experience.date"></app-experience>
         <div class="card-footer">
-          <button type="button" class="btn btn-default" (click)="edit(experience.key)">Editar</button>
+          <button type="button" class="btn btn-primary mx-2" (click)="edit(experience.key)">Editar</button>
           <button type="button" class="btn btn-danger ml-2" (click)="delete(experience.key)">Excluir</button>
         </div>
       </div>

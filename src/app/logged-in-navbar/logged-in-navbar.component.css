@@ -3,7 +3,7 @@ header{
   justify-content: space-between;
   align-items: center;
   margin-top: 1rem;
-  color: black;
+  color: white;
 }
 
 h1{
@@ -42,6 +42,8 @@ button p {
 }
 
 #profileImage img{
-  width: 30%;
+  width: 40%;
   border-radius: 50%;
+  aspect-ratio: 1/1;
+  border: 4px solid white;
 }

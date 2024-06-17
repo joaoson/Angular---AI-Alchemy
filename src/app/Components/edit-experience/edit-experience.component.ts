@@ -7,6 +7,7 @@ import { UserService } from '../../Shared/user.service';
 import { Profile } from '../../Shared/profile';
 import { Experience } from '../../Shared/experience';
 import {Location} from '@angular/common';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-edit-experience',
@@ -18,9 +19,9 @@ export class EditExperienceComponent implements OnInit {
   experienceForm!: FormGroup;
   profile!: Profile | null;
   experience!: Experience | null;
+  profiles! : Observable<any>;
 
-
- constructor(private location: Location,private fb: FormBuilder, private userService: UserService, private router: Router, private route: ActivatedRoute,  private experienceService: ExperienceService){}
+ constructor(private profileServce: ProfileService, private location: Location,private fb: FormBuilder, private userService: UserService, private router: Router, private route: ActivatedRoute,  private experienceService: ExperienceService){}
 
   ngOnInit(): void {
     this.key = this.route.snapshot.paramMap.get('key') || ''; // Get the key from route parameters
@@ -31,6 +32,7 @@ export class EditExperienceComponent implements OnInit {
       description: [this.experience?.description, Validators.required],
       date: [this.experience?.date, Validators.required]
     });
+    this.profiles = this.profileServce.getAll()
     console.log(this.experience)
     this.profile = this.userService.getUser();
     if(this.profile == null){

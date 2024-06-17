@@ -9,6 +9,7 @@ import { Experience } from '../../Shared/experience';
 import {Location} from '@angular/common';
 import { Model } from '../../Shared/model';
 import { ModelService } from '../../Shared/model.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-edit-model',
@@ -21,9 +22,9 @@ export class EditModelComponent implements OnInit {
   profile!: Profile | null;
   experience!: Experience | null;
   model!: Model | null;
+  profiles!: Observable<any>;
 
-
- constructor(private location: Location,private fb: FormBuilder, private userService: UserService, private router: Router, private route: ActivatedRoute, private modelService: ModelService,  private experienceService: ExperienceService){}
+ constructor(private location: Location,private fb: FormBuilder, private userService: UserService, private router: Router, private route: ActivatedRoute, private modelService: ModelService,  private profileService: ProfileService){}
 
   ngOnInit(): void {
     this.key = this.route.snapshot.paramMap.get('key') || ''; // Get the key from route parameters
@@ -32,8 +33,10 @@ export class EditModelComponent implements OnInit {
     this.experienceForm = this.fb.group({
       title: [this.model?.title, Validators.required],
       description: [this.model?.description, Validators.required],
+      url: [this.model?.url, Validators.required],
       date: [this.model?.date, Validators.required]
     });
+    this.profiles = this.profileService.getAll()
     console.log(this.model)
     this.profile = this.userService.getUser();
     if(this.profile == null){
@@ -68,12 +71,13 @@ export class EditModelComponent implements OnInit {
         title: this.experienceForm.value.title,
         description: this.experienceForm.value.description,
         date: this.experienceForm.value.date,
-        user: this.profile.Username
+        user: this.profile.Username,
+        url: this.experienceForm.value.url
       };
       this.modelService.updateExperience(updatedExperience, this.key)
         .then(() => {
           console.log('Model updated successfully');
-          this.router.navigate(['/profile']); // Redirect to settings page after update
+          this.router.navigate(['/models']); // Redirect to settings page after update
         })
         .catch((error: any) => {
           console.error('Error updating experience:', error);

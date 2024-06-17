@@ -46,7 +46,7 @@ export class ProfileService {
     );
   }
 
-  delete(key: string) {
+  delete(key: string | undefined) {
     this.db.object(`profile/${key}`).remove();
   }
 }

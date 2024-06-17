@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms'; // Import ReactiveFormsModule
 import { Profile } from '../Shared/profile';
 import { ProfileService } from '../Shared/profile.service';
+import { url } from 'inspector';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -16,7 +18,7 @@ export class SignUpPageComponent {
   key: string = '';
   registrationForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private profileService: ProfileService) {}
+  constructor(private fb: FormBuilder, private profileService: ProfileService, private router: Router) {}
 
   ngOnInit(): void {
     this.registrationForm = this.fb.group({
@@ -28,6 +30,7 @@ export class SignUpPageComponent {
       gender: ['', Validators.required],
       country: ['', Validators.required],
       confirmPassword: ['', Validators.required],
+      url: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
@@ -45,6 +48,7 @@ export class SignUpPageComponent {
         Gender: this.registrationForm.value.gender,
         Country: this.registrationForm.value.country,
         Email: this.registrationForm.value.email,
+        Url: this.registrationForm.value.url,
         Password: this.registrationForm.value.password,
       };
 
@@ -53,6 +57,8 @@ export class SignUpPageComponent {
 
       // Clear the form after submission
       this.registrationForm.reset();
+      this.router.navigate(['/login']); // Redirect to settings page after update
+
     } else {
       console.log('Form is invalid');
     }

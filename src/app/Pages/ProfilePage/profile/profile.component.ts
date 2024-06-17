@@ -7,6 +7,8 @@ import { Profile } from '../../../Shared/profile';
 import { UserService } from '../../../Shared/user.service';
 import { Router } from '@angular/router';
 import { ProfileService } from '../../../Shared/profile.service';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-profile',
@@ -19,6 +21,7 @@ export class ProfileComponent {
   experience!: Experience
   key: string = '';
   experienceForm!: FormGroup;
+  registrationForm!: FormGroup;
   experiences!: Observable<any>;
   profile!: Profile | null;
   profiles!:Observable<any>;
@@ -38,6 +41,9 @@ export class ProfileComponent {
       title: ['', Validators.required],
       company: ['', Validators.required],
       date: ['', Validators.required]
+    });
+    this.registrationForm = this.fb.group({
+      About: ['', Validators.required]
     });
   }
 
@@ -65,7 +71,24 @@ export class ProfileComponent {
   }
 
   delete(key: string) {
-    this.experienceService.delete(key);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success"
+        });
+      this.experienceService.delete(key);
+      }
+    });
   }
 
 
@@ -73,5 +96,49 @@ export class ProfileComponent {
     if (key) {
       this.router.navigate(['/edit-experience', key]);
     }}
+
+
+    onSubmitEdit(): any {
+      if (this.registrationForm.valid) {
+        if(this.profile == null){
+          return
+        }
+        // Create a new Profile object and assign form values
+        const updatedProfile: Profile = {
+          ...this.profile, // Include existing profile properties (including key if present)
+          firstName: this.registrationForm.value.firstName,
+        };
+
+        // Send the profile object to the service
+        if(this.profile.key == undefined){
+          return
+        }
+        if (updatedProfile.key) {
+          this.profileService.update(updatedProfile, updatedProfile.key)
+            .then(() => {
+              console.log('Profile updated successfully');
+              this.userService.setUser(updatedProfile)
+              console.log(updatedProfile)
+              console.log(this.profile)
+            })
+            .catch((error: any) => {
+              console.error('Error updating profile:', error);
+            });
+        }
+        console.log("passou")
+        Swal.fire({
+          icon: "success",
+          title: "Profile has been updated successfully.",
+        });
+
+      } else {
+        console.log('Form is invalid');
+        Swal.fire({
+          icon: "error",
+          title: "Profile not updated.",
+          text: "Please check your inputs fields, something is not right.",
+        });
+      }
+    }
 
 }

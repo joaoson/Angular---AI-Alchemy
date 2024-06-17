@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { Observable, first } from 'rxjs';
 import { ModelService } from '../../Shared/model.service';
 import { Model } from '../../Shared/model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-settings',
@@ -20,7 +21,7 @@ export class ModelsPageComponent {
   profileUpdated!: Profile | null;
   models! : Observable<any>;
   model!: Model ;
-
+  profiles!: Observable<any>;
 
   constructor(private modelsService: ModelService,  private fb: FormBuilder, private profileService: ProfileService, private userService: UserService, private router: Router) {}
 
@@ -30,6 +31,8 @@ export class ModelsPageComponent {
       this.router.navigate(['/login']);
       return
     }
+    this.profiles = this.profileService.getAll()
+
     this.experienceForm = this.fb.group({
       title: ['', Validators.required],
       company: ['', Validators.required],
@@ -64,8 +67,24 @@ export class ModelsPageComponent {
 
 
   delete(key: string) {
-    console.log(key)
-    this.modelsService.delete(key);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success"
+        });
+        this.modelsService.delete(key);
+      }
+    });
   }
 
 

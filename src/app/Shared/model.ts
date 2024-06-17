@@ -3,6 +3,6 @@ export class Model {
   description: string = '';
   date: string = '';
   user?: string | undefined = '';
-  likes?: number;
+  likes?: number = 0;
   url?: string = '';
 }

@@ -5,16 +5,20 @@
     <h1>Edit your Model</h1>
 <form [formGroup]="experienceForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
-    <label for="firstName">Job Title</label>
+    <label for="firstName">Model Title</label>
     <input id="firstName" formControlName="title" type="text" class="form-control">
   </div>
   <div class="form-group">
-    <label for="surname">Company</label>
+    <label for="surname">Description</label>
     <input id="surname" formControlName="description" type="text" class="form-control">
   </div>
   <div class="form-group">
     <label for="dob">Date</label>
     <input id="dob" formControlName="date" type="date" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="url">URL</label>
+    <input id="url" formControlName="url" type="text" class="form-control">
   </div>
   <div class="py-5">
     <button type="button" (click)="back()" class="btn btn-danger mx-1">Cancel</button>
@@ -39,22 +43,18 @@
     <div class="people-viewed">
       <h3>People also viewed</h3>
       <ul>
-        <li>Konstantin Vinogradov - Product Designer</li>
-        <li>Ilya Dudakov - Crypto Designer #1 in the World</li>
-        <li>Konstantin Zlobin - UI/UX Designer</li>
-        <li>Oleg Putincev - UX/UI Designer</li>
-        <li>Casey Neistat - Youtuber</li>
+        <div *ngFor="let users of profiles | async">
+        <li>{{users.Username}}</li>
+      </div>
+
       </ul>
     </div>
     <div class="learning">
       <h3>Learning</h3>
       <p>Add new skills with these courses, free for 24 hours</p>
-      <div class="course">
-        <img src="" alt="Course Thumbnail">
-        <p>Showreel Design Trends 2019 - 1,649 Views</p>
-      </div>
+
     </div>
-  </div>
+    </div>
 </main>
 
 <!-- Include Bootstrap JS -->

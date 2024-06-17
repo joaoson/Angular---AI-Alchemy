@@ -9,7 +9,7 @@
         <h1>Sign Up</h1>
         <h6>Create an account and join the worderful world of AI</h6>
       </div>
-      <div class="d-flex col-12 justify-content-evenly">
+      <div class="d-flex col-12 justify-content-between">
           <div class="d-flex flex-column col-5" >
           <input type="text" placeholder="First name" id="firstName" formControlName="firstName">
           <app-print-error [control]="registrationForm.controls['firstName']"></app-print-error>
@@ -20,7 +20,7 @@
         </div>
       </div>
 
-      <div class="d-flex col-12 justify-content-evenly  ">
+      <div class="d-flex col-12 justify-content-between  ">
 
 
         <div class="d-flex flex-column col-5" >
@@ -34,7 +34,7 @@
         </div>
       </div>
 
-      <div class="d-flex col-12 justify-content-evenly  ">
+      <div class="d-flex col-12 justify-content-between  ">
         <div class="d-flex flex-column col-5">
           <input type="text" placeholder="Gender" id="gender" formControlName="gender">
           <app-print-error [control]="registrationForm.get('gender')"></app-print-error>
@@ -46,7 +46,7 @@
 
         </div>
       </div>
-      <div class="d-flex col-12 justify-content-evenly  ">
+      <div class="d-flex col-12 justify-content-between  ">
 
       <div class="d-flex flex-column col-5">
         <input type="text" placeholder="Phone Number" id="phonenumber" formControlName="phonenumber">
@@ -59,7 +59,12 @@
 
       </div>
       </div>
-      <div class="d-flex col-12 justify-content-evenly  ">
+      <div class="d-flex flex-column col-12">
+        <input type="text" placeholder="Insert your profile image URL." id="url" formControlName="url">
+        <app-print-error [control]="registrationForm.get('url')"></app-print-error>
+
+      </div>
+      <div class="d-flex col-12 justify-content-between  ">
 
       <div class="d-flex flex-column col-5">
         <input type="password" placeholder="Type your password" id="password" formControlName="password">
